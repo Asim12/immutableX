@@ -9,7 +9,11 @@
     "hardhat": "^2.8.4"
   },
   "dependencies": {
+    "@maticnetwork/maticjs": "^3.2.4",
+    "@maticnetwork/maticjs-plasma": "^1.0.4",
+    "@maticnetwork/maticjs-web3": "^1.0.1",
     "@openzeppelin/contracts": "^4.5.0",
+    "@truffle/hdwallet-provider": "^2.0.5",
     "body-parser": "^1.19.2",
     "express": "^4.17.3",
     "fs": "0.0.1-security",

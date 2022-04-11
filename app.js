@@ -202,3 +202,28 @@ app.get('/getMarketPlace', async(req, res) => {
         res.status(404).send(response);
     }
 })
+
+
+const { getPlasmaClient,getAccount, plasma, from } = require('./util')
+console.log(plasma)
+const token = '0x2d7882beDcbfDDce29Ba99965dd3cdF7fcB10A1e'//plasma.parent.erc721
+const tokenId721 = '0x01'
+
+router.get('/bridge', async (req, res) =>{
+    const plasmaClient = await getPlasmaClient()
+    const account = getAccount()
+    console.log(account)
+
+    const erc721RootToken = plasmaClient.erc721(token, true)
+    const result = await erc721RootToken.safeDeposit(tokenId721, account.from)
+    try{
+        const txHash = await result.getTransactionHash()
+        // console.log('asasa', txHash)
+        
+        const txReceipt = await result.getReceipt()
+        res.status(200).send(txReceipt)
+    }catch(err){
+        console.log(err.message)
+        res.status(404).send({message : err.message})
+    }
+})
